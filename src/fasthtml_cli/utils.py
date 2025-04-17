@@ -14,8 +14,6 @@ def create_main_py(name:str, tpl:str, tailwind:bool, reload:bool, pico:bool):
     if tailwind:
         tpl = "tailwind"
 
-    print("tpl", tpl)
-
     opts = []
     if reload: opts.append("live=True")
     if tailwind: opts.append("pico=False")
