@@ -1,0 +1,23 @@
+[project]
+name = "fh-init"
+version = "0.1.1"
+description = "Quickly scaffold FastHTML apps!"
+readme = "README.md"
+authors = [
+    { name = "David Gwyer", email = "d.v.gwyer@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "typer",
+]
+
+[project.scripts]
+fh-init = "fasthtml_cli.cli:app"
+fasthtml-init = "fasthtml_cli.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fasthtml_cli"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

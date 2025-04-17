@@ -1,0 +1,1 @@
+Quickly scaffold FastHTML apps!
