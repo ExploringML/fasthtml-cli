@@ -8,7 +8,8 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "typer",
+    "typer>=0.17.0,<1.0.0",
+    "requests>=2.32.0,<3.0.0",
 ]
 
 [project.urls]

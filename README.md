@@ -26,6 +26,7 @@ uvx fh-init [OPTIONS] NAME
 *   `--uv / --no-uv`: Use uv to manage project dependencies (default: `uv`).
 *   `--tailwind, -t`: Enable Tailwind CSS.
 *   `--deps, -d TEXT`: Space-separated list of Python dependencies to add (e.g., `pandas numpy requests`).
+*   `--gallery, -g TEXT`: Use a FastHTML Gallery example (e.g., `todo_series/beginner`). When used, other template options are ignored.
 *   `--version`: Show version and exit.
 *   `--install-completion`: Install tab completion for the current shell (run once to enable auto-completion).
 *   `--show-completion`: Show completion script to copy or customize the installation.
@@ -42,6 +43,10 @@ uvx fh-init my_awesome_app --reload --tailwind
 
 # Create an app with additional Python dependencies
 uvx fh-init data_app --deps "pandas numpy matplotlib"
+
+# Create an app from the FastHTML Gallery
+uvx fh-init my-todo --gallery todo_series/beginner
+uvx fh-init my-viz --gallery visualizations/observable_plot
 ```
 
 Then to run the FastHTML app:
@@ -63,6 +68,38 @@ fh-init --install-completion
 fh-init <Tab>          # Shows available commands and options
 fh-init --<Tab>        # Shows all available flags
 ```
+
+### FastHTML Gallery Integration
+
+Bootstrap your projects with real-world examples from the official [FastHTML Gallery](https://gallery.fastht.ml/):
+
+```bash
+# Browse examples at https://gallery.fastht.ml/
+# Use the format: category/example_name
+
+# Todo applications
+uvx fh-init my-todo --gallery todo_series/beginner
+
+# Data visualizations  
+uvx fh-init my-charts --gallery visualizations/observable_plot
+
+# Interactive applications
+uvx fh-init my-app --gallery applications/csv_editor
+```
+
+**Gallery Features:**
+- **Complete Examples**: Get fully working FastHTML applications instantly
+- **Auto Dependencies**: Required packages automatically added to `pyproject.toml`
+- **No Modifications**: Gallery code copied exactly as-is for authentic examples
+- **Exclusive Mode**: When using `--gallery`, other template options (`--tailwind`, `--deps`, etc.) are ignored
+
+**Available Categories:**
+- `applications/` - Full-featured apps (csv_editor, tic_tac_toe, etc.)
+- `todo_series/` - Todo app examples of varying complexity
+- `visualizations/` - Data visualization examples
+- `widgets/` - Reusable UI components
+- `svg/` - SVG and graphics examples
+- `dynamic_user_interface_(htmx)/` - Advanced HTMX interactions
 
 ## Development
 

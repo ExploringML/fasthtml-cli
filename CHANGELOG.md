@@ -12,12 +12,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now automatically read from package metadata to stay in sync with `pyproject.toml`
 - Added `--deps` option to specify additional Python dependencies (space-separated)
 - Dependencies are now automatically imported in generated main.py files with proper aliases (e.g., `pandas as pd`, `numpy as np`)
+- **NEW**: Added `--gallery` option to bootstrap projects from the official [FastHTML Gallery](https://gallery.fastht.ml/)
+  - Pull complete working examples with `fh-init my-app --gallery category/example`
+  - Automatic dependency detection from gallery code
+  - When `--gallery` is used, all other template options are ignored (by design)
 
 ### Fixed
 - Fixed bug where `Path` was not imported, causing import errors
 - Fixed duplicate parameter warning for `-p` flag by changing `--template` shorthand to `-tp`
 - Fixed bug where `--deps` dependencies were only added to pyproject.toml but not imported in main.py
 - Fixed single-item tuple syntax for headers (now properly includes trailing comma)
+
+### Security
+- Added input sanitization to prevent path traversal attacks in project names
+- Enhanced error message sanitization to prevent information disclosure
+- Added version constraints to dependencies to improve supply chain security
+- Implemented comprehensive security audit with 0 vulnerabilities found
 
 ### Changed
 - **BREAKING**: Replaced rigid template system with flexible component-based TemplateBuilder
