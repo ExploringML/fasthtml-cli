@@ -1,11 +1,7 @@
-def config(name: str = "", deps: str = ""):
-    # Base dependencies
-    dependencies = ["python-fasthtml"]
-    
-    # Add custom dependencies if provided
-    if deps:
-        custom_deps = [dep.strip() for dep in deps.split() if dep.strip()]
-        dependencies.extend(custom_deps)
+def config(name: str = "", dependencies: list = None):
+    """Generate pyproject.toml content with the given dependencies."""
+    if dependencies is None:
+        dependencies = ["python-fasthtml"]
     
     # Format dependencies for TOML
     deps_str = ', '.join([f'"{dep}"' for dep in dependencies])

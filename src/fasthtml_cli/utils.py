@@ -1,38 +1,35 @@
-import fasthtml_cli.fasthtml_templates.base as base
-import fasthtml_cli.fasthtml_templates.tailwind as tw
-import fasthtml_cli.fasthtml_templates.toml as toml
+from fasthtml_cli.template_builder import TemplateBuilder
+from fasthtml_cli import toml
 
-available_templates = ["base", "tailwind", "toml"]
-
-def create_main_py(name:str, tpl:str, tailwind:bool, reload:bool, pico:bool):
-    "Create the main.py file with selected config options."
+def create_main_py(name: str, template: str, tailwind: bool, reload: bool, pico: bool, deps: str = ""):
+    """Create the main.py file using the flexible template builder."""
     
-    # Whitelist template.
-    if tpl not in available_templates:
-        tpl = available_templates[0]
-
+    builder = TemplateBuilder(name)
+    
+    # Add features based on options
     if tailwind:
-        tpl = "tailwind"
-
-    opts = []
-    if reload: opts.append("live=True")
-    if tailwind: opts.append("pico=False")
-    args = ', '.join(opts)
-    hdr_opts = f"{args}"
-
-	# @todo: Dynamically get the function from the module.
-    if tpl == "base":
-        tpl_func = getattr(base, tpl)
-        return tpl_func(hdr_opts)
-    elif tpl == "tailwind":
-        tpl_func = getattr(tw, tpl)
-        return tpl_func(hdr_opts)
-
-	# Return the base template as a fallback.
-    tpl_func = getattr(base, "base")
-    return tpl_func(hdr_opts)
-
-def create_pyproject_toml(name:str, deps:str=""):
-    "Create the pyproject.toml file with selected config options."
+        builder.add_tailwind()
+    elif pico:  # pico is default unless tailwind is used
+        builder.add_pico()
     
-    return toml.config(name, deps)
+    if reload:
+        builder.add_live_reload()
+    
+    # Add custom dependencies
+    if deps:
+        custom_deps = [dep.strip() for dep in deps.split() if dep.strip()]
+        builder.add_dependencies(custom_deps)
+    
+    return builder.build_main_py()
+
+def create_pyproject_toml(name: str, deps: str = ""):
+    """Create the pyproject.toml file with selected config options."""
+    
+    # Use the template builder to get dependencies for consistency
+    builder = TemplateBuilder(name)
+    if deps:
+        custom_deps = [dep.strip() for dep in deps.split() if dep.strip()]
+        builder.add_dependencies(custom_deps)
+    
+    dependencies = builder.build_pyproject_toml()
+    return toml.config(name, dependencies)

@@ -1,7 +1,6 @@
 from pathlib import Path
 import typer
 from typing_extensions import Annotated
-from fasthtml_cli.fasthtml_templates.base import base
 from fasthtml_cli.utils import create_main_py, create_pyproject_toml
 
 def get_version():
@@ -51,7 +50,7 @@ def main(
         if main_file.exists():
             print(f"Error: {main_file} already exists, skipping")
         else:
-            main_file.write_text(create_main_py(name, template, tailwind, reload, pico))
+            main_file.write_text(create_main_py(name, template, tailwind, reload, pico, deps))
 
         # Create pyproject.toml if uv is enabled.
         if uv:
