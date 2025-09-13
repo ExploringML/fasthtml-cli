@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2025-09-13
+
+### Changed
+- **BREAKING**: Package name changed from `fh-init` to `fh-cli` for consistency
+- Primary command is now `fh-cli` instead of `fh-init`
+- Backward compatibility: `fh-init` command still available during transition period
+
+### Migration Guide
+- **Old:** `uvx fh-init my-app`
+- **New:** `uvx fh-cli my-app`
+- Both commands work during transition period
+- Update your scripts and documentation to use `fh-cli` going forward
+
 ## [0.1.5] - 2025-09-13
 
 ### Added

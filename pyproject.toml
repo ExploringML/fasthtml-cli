@@ -1,6 +1,6 @@
 [project]
-name = "fh-init"
-version = "0.1.5"
+name = "fh-cli"
+version = "0.1.6"
 description = "Quickly scaffold FastHTML apps!"
 readme = "README.md"
 authors = [
@@ -19,6 +19,7 @@ Repository = "https://github.com/ExploringML/fasthtml-cli"
 Documentation = "https://github.com/ExploringML/fasthtml-cli#readme"
 
 [project.scripts]
+fh-cli = "fasthtml_cli.cli:app"
 fh-init = "fasthtml_cli.cli:app"
 fasthtml-init = "fasthtml_cli.cli:app"
 

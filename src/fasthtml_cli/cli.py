@@ -23,7 +23,7 @@ def get_version():
     """Get version from package metadata"""
     try:
         from importlib.metadata import version
-        return version("fh-init")
+        return version("fh-cli")
     except Exception:
         return "Error: Version not found"
 
@@ -31,7 +31,7 @@ app = typer.Typer()
 
 def version_callback(value: bool):
     if value:
-        print(f"fh-init version {get_version()}")
+        print(f"fh-cli version {get_version()}")
         raise typer.Exit()
 
 @app.command()
