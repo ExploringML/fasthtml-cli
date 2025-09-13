@@ -2,9 +2,11 @@
 
 [![PyPI](https://img.shields.io/pypi/v/fh-cli)](https://pypi.org/project/fh-cli/)
 [![License](https://img.shields.io/github/license/ExploringML/fasthtml-cli)](https://github.com/your-username/your-repo/blob/main/LICENSE)
-[![Sponsor](https://img.shields.io/badge/Sponsor-FastHTML%20CLI-pink?logo=github)](https://github.com/sponsors/ExploringML)
+[![Sponsor](https://img.shields.io/badge/Sponsor-FastHTML%20CLI-blue?logo=github)](https://github.com/sponsors/ExploringML)
 
 Fastest way to scaffold FastHTML apps!
+
+![CLI Demo](cli.png)
 
 > **📦 Package Name Change:** This package was previously named `fh-init` but has been renamed to `fh-cli` for consistency. Both commands (`fh-cli` and `fh-init`) work during the transition period. We recommend using `fh-cli` going forward.
 
