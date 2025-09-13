@@ -1,1 +1,2 @@
 - Add an importer similar to --gallery flag feature but for any URL? Maybe show a warning when using this flag about untrusted sources. Do some simple checks to make sure it is a Fasthtml app and no malicious code.
+- Delete the legacy fh-init CLI.
