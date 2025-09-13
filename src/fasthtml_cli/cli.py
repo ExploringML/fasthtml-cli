@@ -1,19 +1,34 @@
-import typer
 from pathlib import Path
+import typer
 from typing_extensions import Annotated
 from fasthtml_cli.fasthtml_templates.base import base
 from fasthtml_cli.utils import create_main_py, create_pyproject_toml
 
+def get_version():
+    """Get version from package metadata"""
+    try:
+        from importlib.metadata import version
+        return version("fh-init")
+    except Exception:
+        return "Error: Version not found"
+
 app = typer.Typer()
+
+def version_callback(value: bool):
+    if value:
+        print(f"fh-init version {get_version()}")
+        raise typer.Exit()
 
 @app.command()
 def main(
     name: Annotated[str, typer.Argument(help="FastHTML app name.")],
-    template: Annotated[str, typer.Option("--template", "-p", help="The name of the FastHTML template to use.")] =  "base",
+    template: Annotated[str, typer.Option("--template", "-tp", help="The name of the FastHTML template to use.")] =  "base",
     reload: Annotated[bool, typer.Option("--reload", "-r", help="Enable live reload.")] = False,
     pico: Annotated[bool, typer.Option("--pico", "-p", help="Enable Pico CSS.")] = True,
     uv: Annotated[bool, typer.Option(help="Use uv to manage project dependencies.")] = True,
     tailwind: Annotated[bool, typer.Option("--tailwind", "-t", help="Enable Tailwind CSS.")] = False,
+    deps: Annotated[str, typer.Option("--deps", "-d", help="Space-separated list of Python dependencies to add (e.g., 'pandas numpy requests').")] = "",
+    version: Annotated[bool, typer.Option("--version", callback=version_callback, help="Show version and exit.")] = False,
     ):
     """
     Scaffold a new FastHTML application.
@@ -44,7 +59,7 @@ def main(
             if pyproject_file.exists():
                 print(f"Error: {pyproject_file} already exists, skipping")
             else:
-                pyproject_file.write_text(create_pyproject_toml(name))
+                pyproject_file.write_text(create_pyproject_toml(name, deps))
     except PermissionError:
         print(f"Error: Permission denied creating {name}")
     except OSError as e:

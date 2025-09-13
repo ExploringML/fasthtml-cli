@@ -29,9 +29,10 @@ def create_main_py(name:str, tpl:str, tailwind:bool, reload:bool, pico:bool):
         return tpl_func(hdr_opts)
 
 	# Return the base template as a fallback.
+    tpl_func = getattr(base, "base")
     return tpl_func(hdr_opts)
 
-def create_pyproject_toml(name:str):
+def create_pyproject_toml(name:str, deps:str=""):
     "Create the pyproject.toml file with selected config options."
     
-    return toml.config(name)
+    return toml.config(name, deps)
